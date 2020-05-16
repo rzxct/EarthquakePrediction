@@ -4,7 +4,7 @@ from statistics import mean, variance
 import sqlite3
 
 
-def 地震预报4中学生(空间范围, 表名):
+def SB(空间范围, 表名):
     连接 = sqlite3.connect("地震目录.db")
     游标 = 连接.cursor()
     sql = 'select max(震级) from %s where 纬度>=%s and 纬度<=%s and 经度>=%s and 经度<=%s and ' % (表名, 空间范围[0], 空间范围[1], 空间范围[2], 空间范围[3]) + '时间>"%s" and 时间<="%s"'

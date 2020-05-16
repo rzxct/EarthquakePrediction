@@ -3,7 +3,7 @@ from tkinter.ttk import Combobox
 from tkinter.messagebox import showinfo
 from datetime import datetime
 from 地震分区 import 地震分区
-from 地震预报库 import 地震预报4中学生
+from 地震预报库 import SB
 
 def 生成输入窗口(父窗口, 地震分区):
     范围 = {'南': DoubleVar(), '北': DoubleVar(), '西': DoubleVar(), '东': DoubleVar()}
@@ -27,7 +27,7 @@ def 生成输入窗口(父窗口, 地震分区):
 
 
 def 运算(范围):  
-    中位数震级 = 地震预报4中学生([范围['南'].get(),范围['北'].get(),范围['西'].get(),范围['东'].get()], 表名="华北")
+    中位数震级 = SB([范围['南'].get(),范围['北'].get(),范围['西'].get(),范围['东'].get()], 表名="华北")
     showinfo(title='预报结论', message= ('%3.1f - %3.1f' % (中位数震级-0.5, 中位数震级+0.5)))
 
 
