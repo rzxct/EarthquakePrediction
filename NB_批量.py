@@ -1,7 +1,9 @@
-from 地震分区 import 地震分区
-from 地震预报库 import 获得震级概率字典,GR拟合,NB
-for 分区名, 空间范围 in 地震分区.items():
-    震级概率字典 = 获得震级概率字典(空间范围, "华北")
-    A, B = GR拟合(震级概率字典)
-    震级 = NB(A, B)
-    print('明年 %s\t将会发生的最大地震为:\tML %3.1f - %3.1f' % (分区名, 震级-0.5, 震级+0.5))
+from areas import areas
+from methods import getM_counts, GRfit,NB
+from datetime import timedelta
+
+for areaname, area in areas.items():
+    M_counts = getM_counts(area, ['2000-01-01 00:00:00', '2020-12-31 00:00:00'], "华北")
+    A, B, error = GRfit(M_counts)
+    M, P = NB(A, B, timedelta(days = 365 * 20), timedelta(days = 365))
+    print('明年 %s\t发生的最大地震最有可能的震级范围为:\tML %3.1f - %3.1f, 概率为%3.2f' % (areaname, M - 0.5, M + 0.5, P))
